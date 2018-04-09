@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 /**
  * Created by Ibada1731710 on 2018-04-09.
@@ -21,7 +22,8 @@ public class Main {
             System.out.println("4- Supprimer un contact");
             System.out.println("5- Ajouter à la liste de rappel");
             System.out.println("6- Afficher la liste de rappel");
-            System.out.println("7- Quitter");
+            System.out.println("7- Charger");
+            System.out.println("8- Quitter");
             System.out.println("Que souhaitez-vous faire?");
             choix=sc.nextInt();
             switch (choix){
@@ -97,6 +99,9 @@ public class Main {
 
                     break;
                 case 7:
+                    break;
+                case 8:
+                    save(map,fileRappel);
                     System.out.println("Bye! Bye!");
                     break;
                 default:
@@ -104,4 +109,34 @@ public class Main {
             }
         }
     }
+    public static void save(HashMap<String,Contact> liste, Queue queue){
+        try {
+            ObjectOutputStream sortie=new ObjectOutputStream(
+                    new BufferedOutputStream(
+                            new FileOutputStream("monfichier.dat")));
+            sortie.writeObject(liste);
+            sortie.writeObject(queue);
+            sortie.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Imposssible de sauvegarder");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Imposssible de sauvegarder");
+        }
+    }
+    public static HashMap<String ,Contact> load(){
+        HashMap<String, Contact> liste=null;
+        try {
+            ObjectInputStream entree=new ObjectInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream("monfichier.dat")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return liste;
+    }
+
 }

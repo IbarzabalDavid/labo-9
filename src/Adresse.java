@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * Created by ibada1731710 on 2018-04-09.
  */
-public class Adresse {
+public class Adresse implements Serializable {
     private String numPorte;
     private String rue;
     private String ville;
@@ -12,7 +13,7 @@ public class Adresse {
     private String pays;
     private String input;
 
-    private Scanner sc=new Scanner(System.in);
+
 
     public String getNumPorte() {
         return numPorte;
@@ -62,6 +63,7 @@ public class Adresse {
         this.pays = pays;
     }
     public void ajouterAdresse(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("Adresse :");
         System.out.println("  Numéro de porte");
         setNumPorte(sc.next());
@@ -84,6 +86,7 @@ public class Adresse {
         setPays(sc.next());
     }
     public void modifierAdresse(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("Adresse : ");
         System.out.println("  Numéro de porte : ("+getNumPorte()+")");
         input=sc.nextLine().trim();

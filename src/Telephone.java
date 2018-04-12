@@ -1,13 +1,14 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * Created by ibada1731710 on 2018-04-09.
  */
-public class Telephone {
+public class Telephone implements Serializable {
 
     private String type;
     private String num;
-    private Scanner sc=new Scanner(System.in);
+
     private String input;
 
     public String getType() {
@@ -27,12 +28,14 @@ public class Telephone {
     }
 
     public void ajoutelTel(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("À quoi correspond le numéro de téléphone? (cellulaire, maison, travail, ...)");
         setType(sc.next());
         System.out.println("Quel est le numéro? ");
         setNum(sc.next());
     }
     public void modifierTelephone(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("    Information : ("+getType()+")");
         input=sc.nextLine().trim();
         input=sc.nextLine().trim();

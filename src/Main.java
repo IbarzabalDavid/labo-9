@@ -5,16 +5,16 @@ import java.util.*;
  */
 public class Main {
     public static void main(String[] args) {
-        int choix=0;
+        int choix = 0;
         String nom;
-        boolean ok=false;
+        boolean ok = false;
         char rep;
-        Queue<String> fileRappel= new LinkedList<>();
-        Scanner sc=new Scanner(System.in);
-        HashMap<String, Contact> map=new HashMap<>();
+        Queue<String> fileRappel = new LinkedList<>();
+        Scanner sc = new Scanner(System.in);
+        HashMap<String, Contact> map = new HashMap<>();
 
         System.out.println("LISTE DE CONTACTS");
-        while (choix!=7){
+        while (choix != 8) {
             System.out.println("------------------------");
             System.out.println("1- Ajouter un contact");
             System.out.println("2- Modifier un contact");
@@ -23,85 +23,83 @@ public class Main {
             System.out.println("5- Ajouter à la liste de rappel");
             System.out.println("6- Afficher la liste de rappel");
             System.out.println("7- Charger");
-            System.out.println("8- Quitter");
+            System.out.println("8- Quitter et sauvegarder");
             System.out.println("Que souhaitez-vous faire?");
-            choix=sc.nextInt();
-            switch (choix){
+
+            choix = obtenirNb();
+            switch (choix) {
                 case 1:
-                    Contact contact=new Contact();
+                    Contact contact = new Contact();
                     contact.ajouterContact();
-                    map.put(contact.getNom().toLowerCase(),contact);
+                    map.put(contact.getNom().toLowerCase(), contact);
                     break;
                 case 2:
                     System.out.println("---------------------------------");
                     System.out.println("Entrez le nom de la personne a modifier.");
-                    nom=sc.next().toLowerCase();
-                    if (map.containsKey(nom)){
+                    nom = sc.next().toLowerCase();
+                    if (map.containsKey(nom)) {
                         map.get(nom).modifierContact();
 
-                        if (!nom.equals(map.get(nom).getNom())){
-                            map.put(map.get(nom).getNom(),map.get(nom));
+                        if (!nom.equals(map.get(nom).getNom())) {
+                            map.put(map.get(nom).getNom(), map.get(nom));
                             map.remove(nom);
                         }
 
-                    }
-                    else {
+                    } else {
                         System.out.println("Contact inexistant :(");
                     }
                     break;
                 case 3:
-                    for (Contact contact1 : map.values()){
+                    for (Contact contact1 : map.values()) {
                         contact1.afficherContact();
                     }
                     break;
                 case 4:
                     System.out.println("Entrez le nom de la personne a supprimer.");
-                    nom=sc.next().toLowerCase();
-                    if (map.containsKey(nom)){
+                    nom = sc.next().toLowerCase();
+                    if (map.containsKey(nom)) {
                         map.remove(nom);
-                    }
-                    else {
+                    } else {
                         System.out.println("Contact inexistant");
                     }
 
                     break;
                 case 5:
                     System.out.println("Qui voulez-vous ajouter à la liste de rappel? (entrez le nom)");
-                    nom=sc.next();
-                    if (map.containsKey(nom)){
+                    nom = sc.next();
+                    if (map.containsKey(nom)) {
                         fileRappel.add(nom);
-                    }
-                    else {
+                    } else {
                         System.out.println("Contact inexistant");
                     }
                     break;
                 case 6:
-                    int i=0;
-                    if (!fileRappel.isEmpty()){
-                        System.out.println("La personne a appeler en priorité est : "+fileRappel.peek());
+                    int i = 0;
+                    if (!fileRappel.isEmpty()) {
+                        System.out.println("La personne a appeler en priorité est : " + fileRappel.peek());
                     }
-                    while (!ok && !fileRappel.isEmpty()){
-                        System.out.println(System.lineSeparator()+"Avez vous appelez le premier sur la liste? (o/n)");
-                        rep=sc.next().toLowerCase().charAt(0);
-                        if (rep=='o'){
-                            ok=true;
+                    while (!ok && !fileRappel.isEmpty()) {
+                        System.out.println(System.lineSeparator() + "Avez vous appelez le premier sur la liste? (o/n)");
+                        rep = sc.next().toLowerCase().charAt(0);
+                        if (rep == 'o') {
+                            ok = true;
                             fileRappel.poll();
                             System.out.println("Le premier nom a été retiré de la liste de rappel.");
-                        }
-                        else if (rep=='n'){
-                            ok=true;
-                        }
-                        else {
+                        } else if (rep == 'n') {
+                            ok = true;
+                        } else {
                             System.out.println("Entrez oui ou non");
                         }
                     }
-                    ok=false;
+                    ok = false;
 
                     break;
                 case 7:
+                    map = load();
+                    fileRappel = loadQueue();
                     break;
                 case 8:
-                    save(map,fileRappel);
+                    save(map, fileRappel);
                     System.out.println("Bye! Bye!");
                     break;
                 default:
@@ -109,9 +107,10 @@ public class Main {
             }
         }
     }
-    public static void save(HashMap<String,Contact> liste, Queue queue){
+
+    public static void save(HashMap<String, Contact> liste, Queue queue) {
         try {
-            ObjectOutputStream sortie=new ObjectOutputStream(
+            ObjectOutputStream sortie = new ObjectOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream("monfichier.dat")));
             sortie.writeObject(liste);
@@ -125,18 +124,74 @@ public class Main {
             System.out.println("Imposssible de sauvegarder");
         }
     }
-    public static HashMap<String ,Contact> load(){
-        HashMap<String, Contact> liste=null;
+
+    public static HashMap<String, Contact> load() {
+        HashMap<String, Contact> liste = null;
         try {
-            ObjectInputStream entree=new ObjectInputStream(
+            ObjectInputStream entree = new ObjectInputStream(
                     new BufferedInputStream(
                             new FileInputStream("monfichier.dat")));
+            try {
+                liste = (HashMap<String, Contact>) entree.readObject();
+                entree.close();
+                System.out.println("charge de la liste reussi");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Imposssible de charger Liste");
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Imposssible de charger Liste");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Imposssible de charger Liste");
         }
         return liste;
     }
 
+    public static Queue<String> loadQueue() {
+        Queue<String> queue = null;
+        try {
+            ObjectInputStream entree = new ObjectInputStream(
+                    new BufferedInputStream(
+                            new FileInputStream("monfichier.dat")));
+            try {
+                entree.readObject();
+                queue = (Queue<String>) entree.readObject();
+                entree.close();
+                System.out.println("charge de la file reussi");
+            } catch (IOException e) {
+                System.out.println("Imposssible de charger File");
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.out.println("Imposssible de charger File");
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Imposssible de charger File");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Imposssible de charger File");
+            e.printStackTrace();
+        }
+        return queue;
+    }
+    public static int obtenirNb(){
+        Scanner sc=new Scanner(System.in);
+        String tempo=sc.nextLine();
+        int temp=(int)tempo.charAt(0);
+        if (temp<49||temp>56){
+            return 0;
+        }
+        else if ((int)tempo.charAt(1)!=0){
+            return 0;
+        }
+        else  {
+            int nb=temp-48;
+            return nb;
+        }
+
+    }
 }

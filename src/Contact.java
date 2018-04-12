@@ -1,16 +1,16 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Created by ibada1731710 on 2018-04-09.
  */
-public class Contact {
+public class Contact implements Serializable {
     private String nom;
     private String nomFamille;
     private Adresse add;
     private ArrayList<Telephone> liste = new ArrayList<>();
     private Occupation occ;
-    private Scanner sc=new Scanner(System.in);
     private char reponse;
     private String input;
 
@@ -55,6 +55,7 @@ public class Contact {
 
 
     public void ajouterContact(){
+        Scanner sc=new Scanner(System.in);
         boolean answer=false;
         System.out.println("---------------------------------");
         System.out.println("Veuillez entrer les informations suivantes :"+System.lineSeparator());
@@ -92,6 +93,7 @@ public class Contact {
     }
     public void modifierContact(){
         int i=0;
+        Scanner sc=new Scanner(System.in);
         boolean keepGoing=true;
         boolean answer=false;
         System.out.println("Veuillez entrer les informations suivantes (laisser vide si correct) :");

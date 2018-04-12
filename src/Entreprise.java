@@ -1,12 +1,13 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * Created by ibada1731710 on 2018-04-09.
  */
-public class Entreprise {
+public class Entreprise implements Serializable {
     private String nomJob;
     private Adresse adresseJob;
-    private Scanner sc=new Scanner(System.in);
+
     private String input;
 
     public String getNomJob() {
@@ -25,6 +26,7 @@ public class Entreprise {
         this.adresseJob = adresseJob;
     }
     public void ajouterEntreprise(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("  Entreprise :");
         System.out.println("    Nom :");
         setNomJob(sc.next());
@@ -33,6 +35,7 @@ public class Entreprise {
         setAdresseJob(adresseJob);
     }
     public void modifierEntreprise(){
+        Scanner sc=new Scanner(System.in);
         System.out.println("  Entrprise : ");
         System.out.println("    Nom : ("+getNomJob()+")");
         input=sc.nextLine().trim();

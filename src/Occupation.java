@@ -29,7 +29,7 @@ public class Occupation implements Serializable {
         Scanner sc=new Scanner(System.in);
         System.out.println("Occupation :");
         System.out.println("  Poste :");
-        setPoste(sc.next());
+        setPoste(Main.demanderString());
         Entreprise entreprise=new Entreprise();
         entreprise.ajouterEntreprise();
         setJob(entreprise);
@@ -39,8 +39,7 @@ public class Occupation implements Serializable {
         Scanner sc=new Scanner(System.in);
         System.out.println("Occupation : ");
         System.out.println("  Poste : ("+getPoste()+")");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setPoste(input);
         }

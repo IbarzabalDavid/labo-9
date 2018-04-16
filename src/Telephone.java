@@ -37,8 +37,7 @@ public class Telephone implements Serializable {
     public void modifierTelephone(){
         Scanner sc=new Scanner(System.in);
         System.out.println("    Information : ("+getType()+")");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setType(input);
         }

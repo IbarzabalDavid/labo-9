@@ -68,7 +68,7 @@ public class Adresse implements Serializable {
         System.out.println("  Numéro de porte");
         setNumPorte(sc.next());
         System.out.println("  Rue :");
-        setRue(sc.next());
+        setRue(Main.demanderString());
         System.out.println("  Appartement :");
         input=sc.nextLine().trim();
         input=sc.nextLine().trim();
@@ -79,11 +79,11 @@ public class Adresse implements Serializable {
             setAppart(sc.next());
         }
         System.out.println("  Ville :");
-        setVille(sc.next());
+        setVille(Main.demanderString());
         System.out.println("  Province :");
-        setProvince(sc.next());
+        setProvince(Main.demanderString());
         System.out.println("  Pays :");
-        setPays(sc.next());
+        setPays(Main.demanderString());
     }
     public void modifierAdresse(){
         Scanner sc=new Scanner(System.in);
@@ -95,7 +95,7 @@ public class Adresse implements Serializable {
             setNumPorte(input);
         }
         System.out.println("  Rue : ("+getRue()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setRue(input);
         }
@@ -105,17 +105,17 @@ public class Adresse implements Serializable {
             setAppart(input);
         }
         System.out.println("  Ville : ("+getVille()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setVille(input);
         }
         System.out.println("  Province : ("+getProvince()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setProvince(input);
         }
         System.out.println("  Pays : ("+getPays()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setPays(input);
         }

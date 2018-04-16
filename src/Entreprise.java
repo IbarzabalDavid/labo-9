@@ -29,7 +29,7 @@ public class Entreprise implements Serializable {
         Scanner sc=new Scanner(System.in);
         System.out.println("  Entreprise :");
         System.out.println("    Nom :");
-        setNomJob(sc.next());
+        setNomJob(Main.demanderString());
         Adresse adresseJob=new Adresse();
         adresseJob.ajouterAdresse();
         setAdresseJob(adresseJob);
@@ -38,8 +38,7 @@ public class Entreprise implements Serializable {
         Scanner sc=new Scanner(System.in);
         System.out.println("  Entrprise : ");
         System.out.println("    Nom : ("+getNomJob()+")");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setNomJob(input);
         }

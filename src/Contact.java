@@ -60,9 +60,9 @@ public class Contact implements Serializable {
         System.out.println("---------------------------------");
         System.out.println("Veuillez entrer les informations suivantes :"+System.lineSeparator());
         System.out.println("Prénom :");
-        setNom(sc.next());
+        setNom(Main.demanderString());
         System.out.println("Nom :");
-        setNomFamille(sc.next());
+        setNomFamille(Main.demanderString());
         Adresse adresse=new Adresse();
         adresse.ajouterAdresse();
         setAdd(adresse);
@@ -99,13 +99,12 @@ public class Contact implements Serializable {
         System.out.println("Veuillez entrer les informations suivantes (laisser vide si correct) :");
         System.out.println("---------------------------------");
         System.out.println("Prénom : ("+getNom()+")");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setNom(input);
         }
         System.out.println("Nom de famille : ("+getNomFamille()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderString().trim();
         if(!input.equals("")){
             setNomFamille(input);
         }

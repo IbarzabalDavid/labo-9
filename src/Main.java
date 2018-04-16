@@ -26,7 +26,13 @@ public class Main {
             System.out.println("8- Quitter et sauvegarder");
             System.out.println("Que souhaitez-vous faire?");
 
-            choix = obtenirNb();
+            try{
+                String temp=sc.nextLine();
+                choix=Integer.parseInt(temp);
+            }catch (Exception ex){
+                System.out.println("Exception trouvée : "+ex);
+                choix=0;
+            }
             switch (choix) {
                 case 1:
                     Contact contact = new Contact();
@@ -178,20 +184,31 @@ public class Main {
         }
         return queue;
     }
-    public static int obtenirNb(){
-        Scanner sc=new Scanner(System.in);
-        String tempo=sc.nextLine();
-        int temp=(int)tempo.charAt(0);
-        if (temp<49||temp>56){
-            return 0;
-        }
-        else if ((int)tempo.charAt(1)!=0){
-            return 0;
-        }
-        else  {
-            int nb=temp-48;
-            return nb;
+
+    public static String demanderString(){
+        Scanner sc =new Scanner(System.in);
+        boolean justLettre=false;
+        String rep="";
+        while (!justLettre){
+            rep=sc.nextLine();
+            for (int i=0;i<rep.length();i++){
+                int temp=(int)rep.charAt(i);
+                if (temp<65||temp>122||(temp<97&&temp>90)){
+                    justLettre=false;
+                    System.out.println("Entrez seulement des lettres (A à Z)");
+                    i=rep.length();
+                }
+                else {
+                    justLettre=true;
+                }
+            }
+            if (rep.length()==0){
+                justLettre=true;
+            }
         }
 
+        return rep;
+
     }
+
 }

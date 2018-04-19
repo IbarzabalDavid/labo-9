@@ -66,31 +66,30 @@ public class Adresse implements Serializable {
         Scanner sc=new Scanner(System.in);
         System.out.println("Adresse :");
         System.out.println("  Numéro de porte");
-        setNumPorte(sc.next());
+        setNumPorte(Main.demanderNombre());
         System.out.println("  Rue :");
         setRue(Main.demanderString());
         System.out.println("  Appartement :");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
-        if (input.equals("")){
-            setAppart("");
-        }
-        else {
-            setAppart(sc.next());
-        }
+        setAppart(Main.demanderNombre());
         System.out.println("  Ville :");
         setVille(Main.demanderString());
-        System.out.println("  Province :");
-        setProvince(Main.demanderString());
         System.out.println("  Pays :");
-        setPays(Main.demanderString());
+        setPays(Main.checkUpPays());
+        System.out.println("  Province :");
+        if (getPays().equals("canada")){
+            setProvince(Main.checkUpProvince());
+        }
+        else {
+            setProvince(Main.demanderString());
+        }
+
+
     }
     public void modifierAdresse(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Adresse : ");
         System.out.println("  Numéro de porte : ("+getNumPorte()+")");
-        input=sc.nextLine().trim();
-        input=sc.nextLine().trim();
+        input=Main.demanderNombre().trim();
         if(!input.equals("")){
             setNumPorte(input);
         }
@@ -100,7 +99,7 @@ public class Adresse implements Serializable {
             setRue(input);
         }
         System.out.println("  Appartement : ("+getAppart()+")");
-        input=sc.nextLine().trim();
+        input=Main.demanderNombre().trim();
         if(!input.equals("")){
             setAppart(input);
         }
@@ -109,16 +108,22 @@ public class Adresse implements Serializable {
         if(!input.equals("")){
             setVille(input);
         }
-        System.out.println("  Province : ("+getProvince()+")");
-        input=Main.demanderString().trim();
-        if(!input.equals("")){
-            setProvince(input);
-        }
         System.out.println("  Pays : ("+getPays()+")");
-        input=Main.demanderString().trim();
+        input=Main.checkUpPays().trim();
         if(!input.equals("")){
             setPays(input);
         }
+        System.out.println("  Province : ("+getProvince()+")");
+        if (getPays().equals("canada")){
+            input=Main.checkUpProvince();
+        }
+        else {
+            input=Main.demanderString();
+        }
+        if(!input.equals("")){
+            setProvince(input);
+        }
+
 
     }
     public void afficherAdresse(){

@@ -193,7 +193,7 @@ public class Main {
             rep=sc.nextLine();
             for (int i=0;i<rep.length();i++){
                 int temp=(int)rep.charAt(i);
-                if (temp<65||temp>122||(temp<97&&temp>90)){
+                if (temp<65||temp>122||(temp<97&&temp>90)&& temp!=32){
                     justLettre=false;
                     System.out.println("Entrez seulement des lettres (A à Z)");
                     i=rep.length();
@@ -209,6 +209,115 @@ public class Main {
 
         return rep;
 
+    }
+    public static String demanderNombre(){
+        Scanner sc =new Scanner(System.in);
+        boolean justNb=false;
+        String rep="";
+        while (!justNb){
+            rep=sc.nextLine();
+            for (int i=0;i<rep.length();i++){
+                int temp=(int)rep.charAt(i);
+                if (temp<48||temp>57){
+                    justNb=false;
+                    System.out.println("Entrez seulement des chiffres (0 à 9)");
+                    i=rep.length();
+                }
+                else {
+                    justNb=true;
+                }
+            }
+            if (rep.length()==0){
+                justNb=true;
+            }
+        }
+
+        return rep;
+
+    }
+    public static String checkUpPhone(){
+        Scanner sc =new Scanner(System.in);
+        boolean phoneOK=false;
+        String rep="";
+        while (!phoneOK){
+            rep=sc.nextLine();
+            if (rep.length()==12){
+                for (int i=0;i<12;i++){
+                    int temp=(int)rep.charAt(i);
+                    if (i==3||i==7){
+                        if (temp==45){
+                            phoneOK=true;
+                        }
+                        else {
+                            System.out.println("Entrez votre numero sur la forme:  418-542-3435");
+                        }
+                    }
+                    else if (temp<48||temp>57){
+                        phoneOK=false;
+                        System.out.println("Entrez votre numero sur la forme:  418-542-3435");
+                        i=rep.length();
+                    }
+                    else {
+                        phoneOK=true;
+                    }
+                }
+                if (rep.length()==0){
+                    phoneOK=true;
+                }
+            }
+            else {
+                System.out.println("Entrez votre numero sur la forme:  418-542-3435");
+            }
+
+        }
+
+        return rep;
+
+    }
+    public static String checkUpPays(){
+        String tabPays[]={"canada","états-unis","mexique","congo","france","allemagne","espagne","portugal","argentine","brésil"};
+        Scanner sc=new Scanner(System.in);
+        String rep="";
+        boolean paysOk=false;
+
+        while (!paysOk){
+            rep=sc.nextLine();
+            if (rep.length()==0){
+                paysOk=true;
+            }
+            for (int i=0;i<tabPays.length;i++){
+                if (tabPays[i].equals(rep)){
+                    paysOk=true;
+                }
+            }
+            if (!paysOk){
+                System.out.println("Le pays entré n'existe pas ou n'est pas dans la liste permise");
+            }
+        }
+
+        return rep;
+    }
+    public static String checkUpProvince() {
+        String tabProvince[]={"colombie britanique","alberta","saskatchewan","manitoba","ontario","quebec","yukon","nunavut","nord ouest","terre neuve et labrador","prince édouard","nouvelle écosse","nouveau brunkswick"};
+        Scanner sc = new Scanner(System.in);
+        String rep = "";
+        boolean provOk = false;
+        while (!provOk) {
+            rep = sc.nextLine();
+            if (rep.length()==0){
+                provOk=true;
+            }
+            for (int i = 0; i < tabProvince.length; i++) {
+                if (tabProvince[i].equals(rep)) {
+                    provOk = true;
+                }
+            }
+            if (!provOk) {
+                System.out.println("La province n'existe pas ou n'est pas dans la liste permise");
+            }
+        }
+
+        return rep;
     }
 
 }

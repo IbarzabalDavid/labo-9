@@ -30,9 +30,9 @@ public class Telephone implements Serializable {
     public void ajoutelTel(){
         Scanner sc=new Scanner(System.in);
         System.out.println("À quoi correspond le numéro de téléphone? (cellulaire, maison, travail, ...)");
-        setType(sc.next());
+        setType(Main.demanderString());
         System.out.println("Quel est le numéro? ");
-        setNum(sc.next());
+        setNum(Main.checkUpPhone());
     }
     public void modifierTelephone(){
         Scanner sc=new Scanner(System.in);
@@ -42,7 +42,7 @@ public class Telephone implements Serializable {
             setType(input);
         }
         System.out.println("    Numéro : ("+getNum()+")");
-        input=sc.nextLine().trim();
+        input=Main.checkUpPhone().trim();
         if(!input.equals("")){
             setNum(input);
         }
